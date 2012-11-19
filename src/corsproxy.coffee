@@ -50,7 +50,7 @@ module.exports = (req, res, proxy) ->
       [host, port] = hostname.split(':')
       target = {
         host: host,
-        port: port
+        port: port or 80
       }
       req.headers.host = hostname
 
@@ -59,9 +59,8 @@ module.exports = (req, res, proxy) ->
       res.end();
       return;
 
-    # console.log "proxying to #{target.host}:#{target.port}#{path}"
-    
-    
+    console.log "proxying to #{target.host}:#{target.port}#{path}"
+
     res.setHeader(key, value) for key, value of cors_headers
     
     # req.headers.host = hostname
